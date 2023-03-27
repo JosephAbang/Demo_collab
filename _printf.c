@@ -5,9 +5,7 @@
 
 /**
  * _printf - Print different formats to standard output
- *
  * @format: format string
- *
  * Return: number of characters printed
  */
 
@@ -20,7 +18,7 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	while (format[i])
 	{
-		if (format[i] == '%')
+		if (format[i] == '%' || format[i] == '\0')
 		{
 			i++;
 			if (format[i] == '%')
@@ -52,7 +50,7 @@ int _printf(const char *format, ...)
 					while (int_arg != 0)
 					{
 						int_len++;
-						int_arg /= 10;
+						int_arg = 10;
 					}
 				}
 				write(1, &int_arg, int_len);
