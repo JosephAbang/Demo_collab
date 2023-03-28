@@ -19,5 +19,8 @@ int print_str(va_list arg);
 int print_percent(va_list arg);
 int _printf(const char *format, ...);
 int (*get_printer(char c))(va_list);
+int print_integer(va_list args);
+
+
 
 #endif /* MAIN_H */
