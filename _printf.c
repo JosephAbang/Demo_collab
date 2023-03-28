@@ -37,8 +37,7 @@ int _printf(const char *format, ...)
 				c = va_arg(args, int);
 				write(1, &c, 1);
 				count++;
-			}
-		}
+			}}
 		else
 		{
 			write(1, &format[i], 1);
