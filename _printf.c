@@ -27,7 +27,7 @@ int _printf(const char *format, ...)
 			{
 				str = va_arg(args, char *);
 				slen = 0;
-				while (*(str + slen) != '\0')
+				while (str[slen] != '\0')
 				{
 					slen++;
 				}
