@@ -1,50 +1,58 @@
 #include "main.h"
-#include <unistd.h>
 #include <stdarg.h>
+#include <unistd.h>
+
 /**
- * _printf - Print different formats to standard output
- * @format: format string
+ * get_printer - Get printer function from file
+ * @c: symbol
+ * Return: pointer to function
+ */
+
+int (*get_printer(char c))(va_list)
+{
+	int i;
+	static printer_t printers[] = {
+		{'c', print_char},
+		{'s', print_str},
+		{'%', print_percent},
+		{0, NULL}
+	};
+
+	for (i = 0; printers[i].spec != 0; i++)
+	{
+		if (printers[i].spec == c)
+			return (printers[i].func);
+	}
+	return (NULL);
+}
+
+/**
+ * _printf - produces output according to a format.
+ * @format: format string containing the characters and the specifiers
+ *
  * Return: number of characters printed
  */
+
 int _printf(const char *format, ...)
 {
-	int i = 0, slen, count = 0;
-	char *str, c;
 	va_list args;
+	int count = 0, i = 0;
+	int (*printer)(va_list);
 
 	va_start(args, format);
-	while (format[i])
+	while (format && format[i])
 	{
-		if (format[i] == '%' || format[i] == '\0')
+		if (format[i] == '%')
 		{
 			i++;
-			if (format[i] == '%')
-			{
-				write(1, &format[i], 1);
-				count++;
-			}
-			else if (format[i] == 's')
-			{
-				str = va_arg(args, char *);
-				slen = 0;
-				while (str[slen] != '\0')
-				{
-					slen++;
-				}
-				write(1, str, slen);
-				count += slen;
-			}
-			else if (format[i] == 'c')
-			{
-				c = va_arg(args, int);
-				write(1, &c, 1);
-				count++;
-			}
+			printer = get_printer(format[i]);
+			if (!printer)
+				return (-1);
+			count += printer(args);
 		}
 		else
 		{
-			write(1, &format[i], 1);
-			count++;
+			count += write(1, &format[i], 1);
 		}
 		i++;
 	}
