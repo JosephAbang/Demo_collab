@@ -1,18 +1,14 @@
 #include "main.h"
 #include <unistd.h>
 #include <stdarg.h>
-#include <string.h>
-
-
 /**
  * _printf - Print different formats to standard output
  * @format: format string
  * Return: number of characters printed
  */
-
 int _printf(const char *format, ...)
 {
-	int i = 0, count = 0;
+	int i = 0, j, count = 0;
 	char *str, c;
 	va_list args;
 
@@ -30,15 +26,21 @@ int _printf(const char *format, ...)
 			else if (format[i] == 's')
 			{
 				str = va_arg(args, char *);
-				write(1, str, strlen(str));
-				count += strlen(str);
+				j = 0;
+				while (str && str[j])
+				{
+					write(1, str[j], strlen(str));
+					count++;
+					j++;
+				}
 			}
 			else if (format[i] == 'c')
 			{
 				c = va_arg(args, int);
 				write(1, &c, 1);
 				count++;
-			}}
+			}
+		}
 		else
 		{
 			write(1, &format[i], 1);
