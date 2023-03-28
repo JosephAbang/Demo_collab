@@ -11,8 +11,8 @@
 
 int _printf(const char *format, ...)
 {
-	int i = 0, count = 0, int_arg, int_len;
-	char *str, c, int_char[12];
+	int i = 0, count = 0;
+	char *str, c;
 	va_list args;
 
 	va_start(args, format);
@@ -38,25 +38,7 @@ int _printf(const char *format, ...)
 				write(1, &c, 1);
 				count++;
 			}
-			/* else if (format[i] == 'd' || format[i] == 'i')
-			{
-				int_arg = va_arg(args, int);
-				if (int_arg == 0)
-				{
-					int_len = 1;
-				}
-				else
-				{
-					while (int_arg != 0)
-					{
-						int_len++;
-						int_arg = 10;
-					}
-				}
-				write(1, &int_arg, int_len);
-				count += int_len;
-			}
-		} */
+		}
 		else
 		{
 			write(1, &format[i], 1);
