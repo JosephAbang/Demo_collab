@@ -1,24 +1,7 @@
 #include "main.h"
 #include <unistd.h>
 #include <stdarg.h>
-
-
-/**
- * _strlen - Print the length of the string
- *
- * @s: String
- *
- * Return: integer ch length of array
- */
-int _strlen(char *s)
-{
-	int ch = 0;
-	while (s[ch] != '\0')
-	{
-		ch++;
-	}
-	return (ch);
-}
+#include <string.h>
 
 
 /**
@@ -47,8 +30,8 @@ int _printf(const char *format, ...)
 			else if (format[i] == 's')
 			{
 				str = va_arg(args, char *);
-				write(1, str, _strlen(str));
-				count += _strlen(str);
+				write(1, str, strlen(str));
+				count += strlen(str);
 			}
 			else if (format[i] == 'c')
 			{
