@@ -4,19 +4,20 @@
 
 /**
  * print_char - print character
- * @arg: argument passed from printf
+ * @args: argument passed from printf
  * Return: nunber of character printed
  */
 
 int print_char(va_list args)
 {
 	char c = va_arg(args, int);
+
 	return (write(1, &c, 1));
 }
 
 /**
  * print_str - print string
- * @arg: argument passed from printf
+ * @args: argument passed from printf
  * Return: nunber of character printed
  */
 int print_str(va_list args)
@@ -26,7 +27,7 @@ int print_str(va_list args)
 
 	if (str == NULL)
 		str = "(null)";
-	while (*str)	
+	while (*str)
 	{
 		len++;
 		str++;
@@ -34,10 +35,9 @@ int print_str(va_list args)
 	return (write(1, str - len, len));
 }
 
-
 /**
  * print_percent - print percent
- * @arg: argument passed from printf
+ * @args: argument passed from printf
  * Return: nunber of character printed
  */
 
