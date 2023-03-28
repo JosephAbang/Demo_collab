@@ -29,7 +29,7 @@ int _printf(const char *format, ...)
 				j = 0;
 				while (str && str[j])
 				{
-					write(1, str[j], strlen(str));
+					write(1, &str[j], 1);
 					count++;
 					j++;
 				}
