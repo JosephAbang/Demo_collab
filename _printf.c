@@ -3,6 +3,7 @@
  * get_match_func - match format with function format
  * @format: It's a character string
  * @list: the list of arguments the function _printf is receiving
+ * @st_format: struct identifier
  * Return: the number of character the function is printing
  */
 int get_match_func(const char *format, va_list list, st_fmt st_format[])
