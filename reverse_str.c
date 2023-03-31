@@ -27,25 +27,23 @@ int func_revstr(va_list list)
  */
 int func_stringUppercase(va_list list)
 {
-	char *str1;
+	char *str = va_arg(list, char *);
 	int i, count = 0;
 
-	str1 = va_arg(list, char *);
-	for (i = 0; str1[i] != '\0'; i++)
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		if ((str1[i] > 0 && str1[i] < 32) || str1[i] >= 127)
+		if (str[i] < 32 || str[i] >= 127)
 		{
-			_putchar('\\');
-			_putchar('x');
-			_putchar('0');
-			_putchar('A');
-			count += 4;
+			count += _putchar('\\');
+			count += _putchar('x');
+			count += _putchar((str[i] / 16) + '0');
+			count += _putchar((str[i] % 16) + (str[i] % 16 < 10 ? '0' : 'A' - 10));
 		}
 		else
 		{
-			_putchar(str1[i]);
-			count++;
+			count += _putchar(str[i]);
 		}
 	}
+
 	return (count);
 }
